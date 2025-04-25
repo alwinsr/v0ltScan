@@ -1,0 +1,12 @@
+# Core HTTP client for interacting with websites and NVD API
+requests>=2.28.0
+
+# Optional: For colored and styled terminal output (logs, banners, etc.)
+colorama>=0.4.6
+rich>=13.4.0
+
+# Optional: If you plan to parse or manipulate HTML (e.g., version in <meta>)
+beautifulsoup4>=4.12.2
+
+# Optional: For CLI argument parsing enhancements
+typer[all]>=0.9.0  # or use argparse from stdlib

@@ -32,7 +32,7 @@ Ensure that you have a config.json file in the config directory with the followi
 ```
 {
     "ndv_api_key": "your_api_key",
-    "ndv_api_url": "https://api.ndv.com"
+    "ndv_api_url": ""https://services.nvd.nist.gov/rest/json/cves/2.0""
 }
 
 

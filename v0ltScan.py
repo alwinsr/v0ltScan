@@ -45,39 +45,20 @@ class VersionDisclosureScanner:
             version_info = meta_generator["content"]
             self.result["detected"] = True
             self.result["disclosed_version"] = version_info
-
-            # Fetch CVEs with severity and confidence scoring
-            cves = get_cves_for_version(version_info) 
-            
-            # Adding severity and confidence to each CVE
-            cve_results = []
-            for cve in cves:
-                cve_id = cve.get("id")
-                cve_summary = cve.get("summary", "No summary available")
-                cvss_score = cve.get("cvss", "N/A")  # CVSS score
-                confidence_score = self._calculate_confidence(cve_id, version_info)  # Confidence score
-
-                cve_results.append({
-                    "id": cve_id,
-                    "summary": cve_summary,
-                    "cvss_score": cvss_score,
-                    "confidence_score": confidence_score
-                })
-
-            self.result["cves"] = cve_results
+            self.result["cves"] = get_cves_for_version(version_info) or search_mitre(version_info)
             return
 
-    def _calculate_confidence(self, cve_id, version_info):
-        # Example logic to calculate confidence score based on various factors
-        # For demonstration, we return a static confidence score for the sake of simplicity.
+    # def _calculate_confidence(self, cve_id, version_info):
+    #     # Example logic to calculate confidence score based on various factors
+    #     # For demonstration, we return a static confidence score for the sake of simplicity.
         
-        # In a real implementation, you'd use more complex logic (e.g., matching CVE to version history)
-        if "high" in cve_id.lower():
-            return "High"
-        elif "medium" in cve_id.lower():
-            return "Medium"
-        else:
-            return "Low"
+    #     # In a real implementation, you'd use more complex logic (e.g., matching CVE to version history)
+    #     if "high" in cve_id.lower():
+    #         return "High"
+    #     elif "medium" in cve_id.lower():
+    #         return "Medium"
+    #     else:
+    #         return "Low"
 
 
 def main():
